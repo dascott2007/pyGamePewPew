@@ -41,6 +41,8 @@ class Game:
                                               '/assets/images/bullets/morebullets.png')
         self.running = True
         self.collided = False
+        self.enemy_collided = False
+        self.block_collided = False
 
     def createTileMap(self):
         for i, row in enumerate(tilemap):
@@ -83,7 +85,7 @@ class Game:
         pygame.display.update()
 
     def camera(self):
-        if self.collided == False:
+        if self.enemy_collided == False and self.block_collided == False:
             pressed = pygame.key.get_pressed()
 
             if pressed[pygame.K_LEFT]:

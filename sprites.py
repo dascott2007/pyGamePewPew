@@ -221,7 +221,7 @@ class Player(pygame.sprite.Sprite):
 
         # collide will return a true/false
         if collideBlock or collideWater:
-            self.game.collided = True
+            self.game.block_collided = True
             if pressed[pygame.K_LEFT]:
                 self.rect.x += PLAYER_STEPS
 
@@ -234,14 +234,14 @@ class Player(pygame.sprite.Sprite):
             elif pressed[pygame.K_DOWN]:
                 self.rect.y -= PLAYER_STEPS
         else:
-            self.game.collided = False
+            self.game.block_collided = False
 
     def collide_enemy(self):
         pressed = pygame.key.get_pressed()
         collide = pygame.sprite.spritecollide(self, self.game.enemies, False, pygame.sprite.collide_rect_ratio(.85))
 
         if collide:
-            self.game.collided = True
+            self.game.enemy_collided = True
             if pressed[pygame.K_LEFT]:
                 self.rect.x += PLAYER_STEPS
 
@@ -254,7 +254,7 @@ class Player(pygame.sprite.Sprite):
             elif pressed[pygame.K_DOWN]:
                 self.rect.y -= PLAYER_STEPS
         else:
-            self.game.collided = False
+            self.game.enemy_collided = False
 
     def collide_weapon(self):
         collide = pygame.sprite.spritecollide(self, self.game.weapons, True)
