@@ -119,6 +119,7 @@ class Player(pygame.sprite.Sprite):
 
     def move(self):
         pressed = pygame.key.get_pressed()
+        Particle(self.game, self.rect.x, self.rect.y)
 
         if pressed[pygame.K_LEFT]:  # Set dictionary value = 1
 
@@ -548,6 +549,32 @@ class Enemy_Healthbar(pygame.sprite.Sprite):
         self.move()
         # self.kill_bar() # Removed the kill bar because it will always kill the bar. It works without this method
 
+
+class Particle(pygame.sprite.Sprite):
+    def __init__(self, game, x, y):
+        self._layer = HEALTH_LAYER
+        self.game = game
+        self.groups = self.game.all_sprites
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        self.image = pygame.Surface((4, 4))
+        self.image.fill((255, 255, 255))
+        self.rect = self.image.get_rect()
+        self.rect.x = x + random.choice([-4, -3, -1, 0, 1, 5, 10, 20])  # create random particals from player
+        self.rect.y = y + TILESIZE  # so all particles start below the feed of the player
+
+        self.lifetime = 6
+        self.counter = 0
+
+    def move(self):
+        self.rect.y += 1  # to give the illusion of an aura
+        self.counter += 1
+
+        if self.counter == self.lifetime:  # so the particles are removed from memory.Otherwise, it's a resource issue
+            self.counter = 0
+            self.kill()
+
+    def update(self):
+        self.move()
 
 
 

@@ -15,7 +15,6 @@ class Spritesheet:
         sprite = pygame.Surface([width, height])
         sprite.blit(self.spritesheet, (0, 0), (x, y, width, height))
         sprite.set_colorkey(BLACK) # so the rocks are transparent and you can see the grass behind
-        
         return sprite
 
 
