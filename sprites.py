@@ -1,5 +1,4 @@
 from configuration import *
-# from weapons import Bullet, Enemy_Bullet
 from weapons import *
 import pygame
 import random
