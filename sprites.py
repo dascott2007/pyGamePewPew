@@ -288,7 +288,8 @@ class Player(pygame.sprite.Sprite):
         if self.health <= 0:
             self.kill()
             self.healthbar.kill_healthbar()
-          #  self.game.running = 0
+            self.game.game_over = True
+            self.game.running = False
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -470,6 +471,7 @@ class Enemy(pygame.sprite.Sprite):
     def collide_player(self):
         collide = pygame.sprite.spritecollide(self, self.game.mainPlayer, True)
         if collide:
+            self.game.game_over = True
             self.game.running = False
 
     def damage(self, amount):
