@@ -1,6 +1,6 @@
-from sprites import *
 from configuration import *
 import pygame
+import math
 
 
 class Weapons(pygame.sprite.Sprite):
@@ -8,8 +8,9 @@ class Weapons(pygame.sprite.Sprite):
 
         self.game = game
         self._layer = GROUND_LAYER
-        self.groups = self.game.all_sprites, self.game.weapons
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        #self.groups = self.game.all_sprites, self.game.weapons
+        self.groups = super().__init__(game.all_sprites, game.weapons)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x * TILESIZE
         self.y = y * TILESIZE
@@ -43,8 +44,9 @@ class Bullet(pygame.sprite.Sprite):
 
         self.game = game
         self._layer = PLAYER_LAYER
-        self.groups = self.game.all_sprites, self.game.bullets
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites, self.game.bullets
+        self.groups = super().__init__(game.all_sprites, game.bullets)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x
         self.y = y
@@ -93,8 +95,9 @@ class Enemy_Bullet(pygame.sprite.Sprite):
 
         self.game = game
         self._layer = PLAYER_LAYER
-        self.groups = self.game.all_sprites, self.game.bullets
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites, self.game.bullets
+        self.groups = super().__init__(game.all_sprites, game.bullets)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x
         self.y = y

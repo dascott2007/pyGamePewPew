@@ -3,16 +3,17 @@ from weapons import *
 from sprites import *
 import sys
 import pygame
+import os
 
 
 
 
 class Spritesheet:
     def __init__(self, path):
-        self.spritesheet = pygame.image.load(path).convert()
+        self.spritesheet = pygame.image.load(path).convert_alpha()
 
     def get_image(self, x, y, width, height):
-        sprite = pygame.Surface([width, height])
+        sprite = pygame.Surface([width, height], pygame.SRCALPHA)
         sprite.blit(self.spritesheet, (0, 0), (x, y, width, height))
         sprite.set_colorkey(BLACK) # so the rocks are transparent and you can see the grass behind
         return sprite
@@ -23,21 +24,13 @@ class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))  # passed as a tuple, hense double parathsis
         self.clock = pygame.time.Clock()
-        self.terrain_spritesheet = Spritesheet('/Users/damaris/Library/Mobile Documents'
-                                               '/com~apple~CloudDocs/GitHub/pyGamePractice'
-                                               '/assets/images/terrain/terrain.png')
-        self.player_spritesheet = Spritesheet('/Users/damaris/Library/Mobile Documents'
-                                              '/com~apple~CloudDocs/GitHub/pyGamePractice'
-                                              '/assets/images/player/rarthothcooking.png')
-        self.enemy_spritesheet = Spritesheet('/Users/damaris/Library/Mobile Documents'
-                                             '/com~apple~CloudDocs/GitHub/pyGamePractice'
-                                             '/assets/images/enemy/goblin.png')
-        self.weapons_spritesheet = Spritesheet('/Users/damaris/Library/Mobile Documents'
-                                             '/com~apple~CloudDocs/GitHub/pyGamePractice'
-                                             '/assets/images/Weapons/evolving_swords.png')
-        self.bullet_spritesheet = Spritesheet('/Users/damaris/Library/Mobile Documents'
-                                              '/com~apple~CloudDocs/GitHub/pyGamePractice'
-                                              '/assets/images/bullets/morebullets.png')
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        
+        self.terrain_spritesheet = Spritesheet(os.path.join(base_path, 'assets/images/terrain/terrain.png'))
+        self.player_spritesheet = Spritesheet(os.path.join(base_path, 'assets/images/player/rarthothcooking.png'))
+        self.enemy_spritesheet = Spritesheet(os.path.join(base_path, 'assets/images/enemy/goblin.png'))
+        self.weapons_spritesheet = Spritesheet(os.path.join(base_path, 'assets/images/Weapons/evolving_swords.png'))
+        self.bullet_spritesheet = Spritesheet(os.path.join(base_path, 'assets/images/bullets/morebullets.png'))
         self.running = True
         self.collided = False
         self.enemy_collided = False
@@ -111,6 +104,7 @@ class Game:
             self.draw()
 
 
+pygame.init()
 game = Game()
 game.create()
 
@@ -118,4 +112,4 @@ while game.running:
     game.main()
     
 pygame.quit()
-sys.exit
+sys.exit()

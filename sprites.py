@@ -1,6 +1,5 @@
 from configuration import *
-from pyGamePractice.weapons import Bullet
-from pyGamePractice.weapons import Enemy_Bullet
+# from weapons import Bullet, Enemy_Bullet
 from weapons import *
 import pygame
 import random
@@ -12,8 +11,9 @@ class Block(pygame.sprite.Sprite):
 
         self.game = game
         self._layer = BLOCKS_LAYER
-        self.groups = self.game.all_sprites, self.game.blocks
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites, self.game.blocks
+        self.groups = super().__init__(game.all_sprites, game.blocks)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x*TILESIZE
         self.y = y*TILESIZE
@@ -34,8 +34,9 @@ class Ground(pygame.sprite.Sprite):
 
         self.game = game
         self._layer = GROUND_LAYER
-        self.groups = self.game.all_sprites
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites
+        self.groups = super().__init__(game.all_sprites)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x * TILESIZE
         self.y = y * TILESIZE
@@ -54,8 +55,9 @@ class Water(pygame.sprite.Sprite):
 
         self.game = game
         self._layer = GROUND_LAYER
-        self.groups = self.game.all_sprites, self.game.water
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites, self.game.water
+        self.groups = super().__init__(game.all_sprites, game.water)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x * TILESIZE
         self.y = y * TILESIZE
@@ -89,8 +91,10 @@ class Player(pygame.sprite.Sprite):
         self.game = game
         self._layer = PLAYER_LAYER
         self.healthbar = Player_Healthbar(game, x, y)
-        self.groups = self.game.all_sprites, self.game.mainPlayer
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites, self.game.mainPlayer
+        self.groups = super().__init__(game.all_sprites, game.mainPlayer)
+        
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x*TILESIZE
         self.y = y*TILESIZE
@@ -292,8 +296,9 @@ class Enemy(pygame.sprite.Sprite):
         self.game = game
         self._layer = ENEMY_LAYER
         self.healthbar = Enemy_Healthbar(game, self, x, y)
-        self.groups = self.game.all_sprites, self.game.enemies
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites, self.game.enemies
+        self.groups = super().__init__(game.all_sprites, game.enemies)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x*TILESIZE
         self.y = y*TILESIZE
@@ -480,8 +485,9 @@ class Player_Healthbar(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
         self.game = game
         self._layer = HEALTH_LAYER
-        self.groups = self.game.all_sprites, self.game.healthbar
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites, self.game.healthbar
+        self.groups = super().__init__(game.all_sprites, game.healthbar)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x*TILESIZE
         self.y = y*TILESIZE
@@ -517,8 +523,9 @@ class Enemy_Healthbar(pygame.sprite.Sprite):
         self.enemy = enemy
         self.game = game
         self._layer = HEALTH_LAYER
-        self.groups = self.game.all_sprites, self.game.healthbar
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites, self.game.healthbar
+        self.groups = super().__init__(game.all_sprites, game.healthbar)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.x = x*TILESIZE
         self.y = y*TILESIZE
@@ -554,8 +561,9 @@ class Particle(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
         self._layer = HEALTH_LAYER
         self.game = game
-        self.groups = self.game.all_sprites
-        pygame.sprite.Sprite.__init__(self, self.groups)
+        # self.groups = self.game.all_sprites
+        self.groups = super().__init__(game.all_sprites)
+        # pygame.sprite.Sprite.__init__(self, self.groups)
         self.image = pygame.Surface((4, 4))
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
